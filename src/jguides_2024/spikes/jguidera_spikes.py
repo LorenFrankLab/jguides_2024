@@ -5,7 +5,6 @@ import copy
 import datajoint as dj
 import numpy as np
 import pandas as pd
-import spyglass as nd
 from spyglass.common import IntervalList, AnalysisNwbfile
 from spyglass.spikesorting.v0.spikesorting_curation import SortInterval, CuratedSpikeSorting
 

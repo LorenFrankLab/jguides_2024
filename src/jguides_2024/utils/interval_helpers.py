@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from spyglass.common.common_interval import interval_list_intersect
+from spyglass.common.common_interval import Interval
 
 from jguides_2024.utils.list_helpers import check_lists_same_length
 from jguides_2024.utils.set_helpers import check_membership
@@ -210,7 +210,7 @@ def get_interval_lists_union(interval_lists, verbose=False):
 
 def combine_interval_lists(interval_list_1, interval_list_2, operation, verbose=False):
     if operation == "intersection":
-        return interval_list_intersect(np.asarray(interval_list_1), np.asarray(interval_list_2))
+        return Interval(np.asarray(interval_list_1)).intersect(np.asarray(interval_list_2)).times
     elif operation == "union":
         return get_interval_lists_union([interval_list_1, interval_list_2], verbose=verbose)
 

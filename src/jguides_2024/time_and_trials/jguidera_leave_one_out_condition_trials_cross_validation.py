@@ -1,7 +1,6 @@
 import datajoint as dj
 import matplotlib.pyplot as plt
 import numpy as np
-import spyglass as nd
 
 from spyglass.common import AnalysisNwbfile
 

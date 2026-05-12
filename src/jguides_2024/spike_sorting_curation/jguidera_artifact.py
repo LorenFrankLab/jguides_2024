@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
 import spikeinterface as si
-import spyglass as nd
 from spyglass.common import IntervalList
 from spyglass.spikesorting.v0.spikesorting_artifact import (ArtifactDetectionSelection,
                                                             ArtifactRemovedIntervalList,
@@ -484,7 +483,7 @@ def populate_ArtifactDetectionParameters():
     global_artifact_detection_params = return_global_artifact_detection_params()
     for artifact_params_name, artifact_params in global_artifact_detection_params.items():
         for prefix in ["", "group_"]:
-            nd.spikesorting.v0.spikesorting_artifact.ArtifactDetectionParameters.insert1(
+            ArtifactDetectionParameters.insert1(
                 {"artifact_params_name": prefix + artifact_params_name, "artifact_params": artifact_params},
                 skip_duplicates=True)
 

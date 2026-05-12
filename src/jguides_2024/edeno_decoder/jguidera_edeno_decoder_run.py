@@ -10,7 +10,6 @@ import datajoint as dj
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import spyglass as nd
 import xarray as xr
 from replay_trajectory_classification import ClusterlessClassifier, SortedSpikesClassifier
 from spyglass.common import IntervalList, IntervalLinearizedPosition, AnalysisNwbfile
