@@ -1,6 +1,5 @@
 import datajoint as dj
 import pandas as pd
-import spyglass as nd
 
 from spyglass.common import AnalysisNwbfile
 

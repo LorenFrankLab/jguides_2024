@@ -6,12 +6,10 @@ from collections.abc import Iterable
 import datajoint as dj
 import numpy as np
 import pandas as pd
-import spyglass as nd
 from datajoint import DataJointError
 from matplotlib import pyplot as plt
 from networkx import NetworkXError
 from spyglass.common import (AnalysisNwbfile, Session, IntervalList)
-from spyglass.utils.dj_helper_fn import fetch_nwb as fetch_nwb_
 
 from jguides_2024.datajoint_nwb_utils.metadata_helpers import get_environments, get_jguidera_nwbf_names
 from jguides_2024.utils.check_well_defined import check_one_none
@@ -66,11 +64,6 @@ def fetch1_tolerate_no_entry(table, attribute=None):
         return table.fetch1(attribute)
     else:
         return None
-
-
-def fetch_nwb(table, **kwargs):
-
-    return fetch_nwb_(table, (AnalysisNwbfile, 'analysis_file_abs_path'), **kwargs)
 
 
 def fetch1_dataframe_tolerate_no_entry(table_subset, object_name=None):

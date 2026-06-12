@@ -4,7 +4,6 @@ import datajoint as dj
 import numpy as np
 import pandas as pd
 import scipy as sp
-import spyglass as nd
 
 from spyglass.common import AnalysisNwbfile
 

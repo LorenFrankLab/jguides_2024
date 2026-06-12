@@ -5,9 +5,10 @@ import datajoint as dj
 import numpy as np
 import pandas as pd
 
+from spyglass.utils.dj_mixin import SpyglassMixin, SpyglassMixinPart
 from jguides_2024.datajoint_nwb_utils.datajoint_table_helpers import get_table_name, make_param_name, \
     populate_flexible_key, get_upstream_table_names, \
-    insert_analysis_table_entry, fetch1_dataframe, fetch_nwb, plot_datajoint_table_rate_map, intersect_tables, \
+    insert_analysis_table_entry, fetch1_dataframe, plot_datajoint_table_rate_map, intersect_tables, \
     insert_manual_table_test_entry, get_meta_param_name, fetch1_dataframes, \
     trial_duration_from_params_table, insert1_print, fetch1_dataframe_from_table_entry, get_table_secondary_key_names, \
     package_secondary_key, get_schema_table_names_from_file, get_schema_names, \
@@ -36,7 +37,7 @@ populate, insert1, fetch1. So avoiding overriding datajoint table methods with t
 """
 
 
-class ParamsBase(dj.Manual):
+class ParamsBase(SpyglassMixin, dj.Manual):
 
     def _get_main_table(self):
         """
@@ -286,23 +287,17 @@ class SelBase(dj.Manual):
     def fetch1_dataframe(self, object_id_name=None, restore_empty_nwb_object=True, df_index_name=None):
         return fetch1_dataframe(self, object_id_name, restore_empty_nwb_object, df_index_name)
 
-    def fetch_nwb(self):
-        return fetch_nwb(self)
 
-
-class PartBase(dj.Part):
+class PartBase(SpyglassMixinPart):
 
     def fetch1_dataframe(self, object_id_name=None, restore_empty_nwb_object=True, df_index_name=None):
         return fetch1_dataframe(self, object_id_name, restore_empty_nwb_object, df_index_name)
-    
-    def fetch_nwb(self):
-        return fetch_nwb(self)
 
     def get_key(self, key):
         return intersect_tables([get_table(x) for x in get_upstream_table_names(self)], key).fetch1("KEY")
 
 
-class ComputedBase(dj.Computed):
+class ComputedBase(SpyglassMixin, dj.Computed):
 
     def _initialize_upstream_entries_tracker(self):
         self.upstream_obj = UpstreamEntries()
@@ -434,9 +429,6 @@ class ComputedBase(dj.Computed):
 
     def get_object_id_name(self, leave_out_object_id=False, unpack_single_object_id=True):
         return get_table_object_id_name(self, leave_out_object_id, unpack_single_object_id)
-
-    def fetch_nwb(self, **kwargs):
-        return fetch_nwb(self, **kwargs)
 
     @staticmethod
     def get_default_df_index_name(df_index_name, object_id_name, df_index_name_map):

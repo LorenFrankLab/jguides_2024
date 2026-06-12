@@ -4,7 +4,6 @@ import datajoint as dj
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import spyglass as nd
 from spyglass.common import close_nwb_files, AnalysisNwbfile
 
 from jguides_2024.datajoint_nwb_utils.datajoint_analysis_helpers import get_subject_id, \

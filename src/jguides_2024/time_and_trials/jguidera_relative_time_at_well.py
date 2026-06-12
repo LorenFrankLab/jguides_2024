@@ -3,7 +3,6 @@ import copy
 import datajoint as dj
 import numpy as np
 import pandas as pd
-import spyglass as nd
 import matplotlib.pyplot as plt
 
 from spyglass.common import AnalysisNwbfile

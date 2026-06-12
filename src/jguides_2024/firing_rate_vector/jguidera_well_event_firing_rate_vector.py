@@ -3,7 +3,6 @@ from collections import namedtuple
 
 import datajoint as dj
 import numpy as np
-import spyglass as nd
 
 from spyglass.common import AnalysisNwbfile
 

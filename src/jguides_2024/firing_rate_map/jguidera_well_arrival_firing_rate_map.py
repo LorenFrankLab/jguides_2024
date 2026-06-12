@@ -1,7 +1,6 @@
 # This module defines tables with well arrival firing rate maps
 
 import datajoint as dj
-import spyglass as nd
 
 from spyglass.common import AnalysisNwbfile
 

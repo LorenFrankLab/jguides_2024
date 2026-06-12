@@ -4,9 +4,8 @@ import datajoint as dj
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import spyglass as nd
 from spyglass.common.common_position import (IntervalLinearizedPosition, IntervalPositionInfo)
-from spyglass.utils.dj_helper_fn import fetch_nwb
+from spyglass.utils.dj_mixin import SpyglassMixinPart
 
 from spyglass.common import AnalysisNwbfile
 
@@ -132,7 +131,7 @@ class IntervalPositionInfoRelabel(ComputedBase):
     -> IntervalPositionInfoRelabelParams
     """
 
-    class RelabelEntries(dj.Part):
+    class RelabelEntries(SpyglassMixinPart):
         definition = """
         -> IntervalPositionInfoRelabel
         -> IntervalPositionInfo
@@ -145,10 +144,6 @@ class IntervalPositionInfoRelabel(ComputedBase):
 
         def fetch1_dataframe(self):
             return fetch1_dataframe_position_info(self)
-
-        def fetch_nwb(self, *attrs, **kwargs):
-            return fetch_nwb(self, (AnalysisNwbfile, 'analysis_file_abs_path'),
-                             *attrs, **kwargs)
 
     def make(self, key):
         relabel_params = (IntervalPositionInfoRelabelParams & key).fetch1()
@@ -259,7 +254,7 @@ class IntervalLinearizedPositionRelabel(ComputedBase):
     -> IntervalLinearizedPositionRelabelParams
     """
 
-    class RelabelEntries(dj.Part):
+    class RelabelEntries(SpyglassMixinPart):
         definition = """
         -> IntervalLinearizedPositionRelabel
         -> IntervalLinearizedPosition
@@ -270,10 +265,6 @@ class IntervalLinearizedPositionRelabel(ComputedBase):
 
         def fetch1_dataframe(self):
             return fetch1_dataframe(self, 'linearized_position').set_index('time')
-
-        def fetch_nwb(self, *attrs, **kwargs):
-            return fetch_nwb(self, (AnalysisNwbfile, 'analysis_file_abs_path'),
-                             *attrs, **kwargs)
 
     def make(self, key):
         relabel_params = (IntervalLinearizedPositionRelabelParams & key).fetch1()
